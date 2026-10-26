@@ -1,6 +1,10 @@
 # ⚡ Bheemdatta NEA
 ### Smart Electricity Outage Notification & Reporting Platform
 
+# ⚡ Bheemdatta NEA
+
+[🌐 Live Website — Try Bheemdatta NEA](https://bheemdatta-electricity-notification-beta.vercel.app/)
+
 <p align="center">
   <strong>Connecting Citizens • Improving Communication • Powering Bheemdatta</strong>
 </p>
