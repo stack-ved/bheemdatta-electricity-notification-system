@@ -1,0 +1,184 @@
+/* -------------------------------------------------------------
+   NEA ELECTRIC CHARGER LOADING ANIMATION KEYFRAMES & UTILITIES
+   Total Cycle Duration: Exactly 3.0 seconds (3000ms)
+   Synchronized Timeline:
+   0%  - 24% (0.00s - 0.72s): Charger plug approaches wall socket smoothly
+   24% - 30% (0.72s - 0.90s): Plug engages & snaps firmly into socket
+   30% - 36% (0.90s - 1.08s): Connection spark flash & contact glow burst
+   32% - 58% (0.96s - 1.74s): Electric current pulses along cable into plug
+   40% - 76% (1.20s - 2.28s): Electricity surges through grid circuits & nodes
+   78% - 88% (2.34s - 2.64s): Current settles, plug smoothly disengages
+   88% - 100% (2.64s - 3.00s): Seamless transition to start next 3s cycle
+------------------------------------------------------------- */
+
+@keyframes neaPlugMotion {
+  0%, 6% {
+    transform: translate(-68px, 0px);
+  }
+  24% {
+    transform: translate(-14px, 0px);
+  }
+  30%, 80% {
+    transform: translate(0px, 0px);
+  }
+  88%, 100% {
+    transform: translate(-68px, 0px);
+  }
+}
+
+@keyframes neaContactFlash {
+  0%, 28% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  31% {
+    opacity: 1;
+    transform: scale(1.6);
+  }
+  35% {
+    opacity: 0.85;
+    transform: scale(1.1);
+  }
+  42%, 76% {
+    opacity: 0.65;
+    transform: scale(1);
+  }
+  82%, 100% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+}
+
+@keyframes neaCableCurrent {
+  0%, 30% {
+    stroke-dashoffset: 420;
+    opacity: 0;
+  }
+  33% {
+    opacity: 1;
+  }
+  54%, 78% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  84% {
+    opacity: 0.2;
+  }
+  88%, 100% {
+    stroke-dashoffset: 420;
+    opacity: 0;
+  }
+}
+
+@keyframes neaCircuitSurge {
+  0%, 38% {
+    stroke-dashoffset: 260;
+    opacity: 0;
+  }
+  44% {
+    opacity: 0.95;
+  }
+  68%, 76% {
+    stroke-dashoffset: 0;
+    opacity: 0.85;
+  }
+  82% {
+    opacity: 0;
+  }
+  100% {
+    stroke-dashoffset: 260;
+    opacity: 0;
+  }
+}
+
+@keyframes neaAmbientGlow {
+  0%, 28% {
+    opacity: 0.08;
+    transform: scale(0.85);
+  }
+  33% {
+    opacity: 0.55;
+    transform: scale(1.15);
+  }
+  50%, 76% {
+    opacity: 0.45;
+    transform: scale(1.05);
+  }
+  82%, 100% {
+    opacity: 0.08;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes neaNodePulse {
+  0%, 42% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  56%, 74% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+  82%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+
+@keyframes neaRunnerBar {
+  0% {
+    left: -35%;
+  }
+  50% {
+    left: 55%;
+  }
+  100% {
+    left: 105%;
+  }
+}
+
+/* Charger Loader Elements Animation Classes (3-second cycle) */
+.nea-plug-anim {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: neaPlugMotion 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+}
+
+.nea-flash-anim {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: neaContactFlash 3s ease-out infinite;
+  will-change: transform, opacity;
+}
+
+.nea-cable-anim {
+  stroke-dasharray: 420;
+  animation: neaCableCurrent 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: stroke-dashoffset, opacity;
+}
+
+.nea-circuit-anim {
+  stroke-dasharray: 120 140;
+  animation: neaCircuitSurge 3s ease-out infinite;
+  will-change: stroke-dashoffset, opacity;
+}
+
+.nea-ambient-anim {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: neaAmbientGlow 3s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.nea-node-anim {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: neaNodePulse 3s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.nea-runner-anim {
+  animation: neaRunnerBar 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  will-change: left;
+}

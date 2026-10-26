@@ -1,0 +1,613 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", "Mukta", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-brand-blue: #0b2545;
+  --color-brand-navy: #13315c;
+  --color-brand-accent: #134074;
+  --color-electric-yellow: #f59e0b;
+  --color-electric-amber: #d97706;
+
+  @keyframes neaPlugMotion {
+    0%, 6% {
+      transform: translate(-68px, 0px);
+    }
+    24% {
+      transform: translate(-14px, 0px);
+    }
+    30%, 80% {
+      transform: translate(0px, 0px);
+    }
+    88%, 100% {
+      transform: translate(-68px, 0px);
+    }
+  }
+
+  @keyframes neaContactFlash {
+    0%, 28% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    31% {
+      opacity: 1;
+      transform: scale(1.6);
+    }
+    35% {
+      opacity: 0.85;
+      transform: scale(1.1);
+    }
+    42%, 76% {
+      opacity: 0.65;
+      transform: scale(1);
+    }
+    82%, 100% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+  }
+
+  @keyframes neaCableCurrent {
+    0%, 30% {
+      stroke-dashoffset: 420;
+      opacity: 0;
+    }
+    33% {
+      opacity: 1;
+    }
+    54%, 78% {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+    84% {
+      opacity: 0.2;
+    }
+    88%, 100% {
+      stroke-dashoffset: 420;
+      opacity: 0;
+    }
+  }
+
+  @keyframes neaCircuitSurge {
+    0%, 38% {
+      stroke-dashoffset: 260;
+      opacity: 0;
+    }
+    44% {
+      opacity: 0.95;
+    }
+    68%, 76% {
+      stroke-dashoffset: 0;
+      opacity: 0.85;
+    }
+    82% {
+      opacity: 0;
+    }
+    100% {
+      stroke-dashoffset: 260;
+      opacity: 0;
+    }
+  }
+
+  @keyframes neaAmbientGlow {
+    0%, 28% {
+      opacity: 0.08;
+      transform: scale(0.85);
+    }
+    33% {
+      opacity: 0.55;
+      transform: scale(1.15);
+    }
+    50%, 76% {
+      opacity: 0.45;
+      transform: scale(1.05);
+    }
+    82%, 100% {
+      opacity: 0.08;
+      transform: scale(0.85);
+    }
+  }
+
+  @keyframes neaNodePulse {
+    0%, 42% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    56%, 74% {
+      opacity: 1;
+      transform: scale(1.4);
+    }
+    82%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes neaRunnerBar {
+    0% {
+      left: -35%;
+    }
+    50% {
+      left: 55%;
+    }
+    100% {
+      left: 105%;
+    }
+  }
+}
+
+@utility nea-plug-anim {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: neaPlugMotion 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+}
+
+@utility nea-flash-anim {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: neaContactFlash 3s ease-out infinite;
+  will-change: transform, opacity;
+}
+
+@utility nea-cable-anim {
+  stroke-dasharray: 420;
+  animation: neaCableCurrent 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: stroke-dashoffset, opacity;
+}
+
+@utility nea-circuit-anim {
+  stroke-dasharray: 120 140;
+  animation: neaCircuitSurge 3s ease-out infinite;
+  will-change: stroke-dashoffset, opacity;
+}
+
+@utility nea-ambient-anim {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: neaAmbientGlow 3s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@utility nea-node-anim {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: neaNodePulse 3s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@utility nea-runner-anim {
+  animation: neaRunnerBar 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  will-change: left;
+}
+
+:root {
+  font-family: var(--font-sans);
+  color-scheme: light;
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --civic-navy-dark: #071527;
+  --civic-navy-deep: #0b1e38;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.35);
+  border-radius: 9999px;
+  transition: background 0.2s ease;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.4);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.7);
+}
+
+/* Keyframe Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes ambientDrift1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-35px, 30px) scale(1.06);
+  }
+  66% {
+    transform: translate(25px, -20px) scale(0.96);
+  }
+}
+
+@keyframes ambientDrift2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -25px) scale(0.95);
+  }
+  66% {
+    transform: translate(-25px, 25px) scale(1.05);
+  }
+}
+
+@keyframes ambientDrift3 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-25px, -30px) scale(1.08);
+  }
+}
+
+@keyframes ambientNodePulse {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.25);
+  }
+}
+
+/* Utility Animation Classes */
+.animate-fade-in-up {
+  animation: fadeInUp 0.35s var(--ease-spring) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s var(--ease-smooth) both;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+.animate-float-gentle {
+  animation: floatGentle 5s ease-in-out infinite;
+}
+
+.animate-ambient-drift-1 {
+  animation: ambientDrift1 26s ease-in-out infinite;
+}
+
+.animate-ambient-drift-2 {
+  animation: ambientDrift2 32s ease-in-out infinite;
+}
+
+.animate-ambient-drift-3 {
+  animation: ambientDrift3 28s ease-in-out infinite;
+}
+
+.animate-ambient-node {
+  animation: ambientNodePulse 7s ease-in-out infinite;
+}
+
+/* NEA Electric Charger Loading Keyframes & Classes */
+@keyframes neaPlugMotion {
+  0%, 6% {
+    transform: translate(-68px, 0px);
+  }
+  24% {
+    transform: translate(-14px, 0px);
+  }
+  30%, 80% {
+    transform: translate(0px, 0px);
+  }
+  88%, 100% {
+    transform: translate(-68px, 0px);
+  }
+}
+
+@keyframes neaContactFlash {
+  0%, 28% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  31% {
+    opacity: 1;
+    transform: scale(1.6);
+  }
+  35% {
+    opacity: 0.85;
+    transform: scale(1.1);
+  }
+  42%, 76% {
+    opacity: 0.65;
+    transform: scale(1);
+  }
+  82%, 100% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+}
+
+@keyframes neaCableCurrent {
+  0%, 30% {
+    stroke-dashoffset: 420;
+    opacity: 0;
+  }
+  33% {
+    opacity: 1;
+  }
+  54%, 78% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  84% {
+    opacity: 0.2;
+  }
+  88%, 100% {
+    stroke-dashoffset: 420;
+    opacity: 0;
+  }
+}
+
+@keyframes neaCircuitSurge {
+  0%, 38% {
+    stroke-dashoffset: 260;
+    opacity: 0;
+  }
+  44% {
+    opacity: 0.95;
+  }
+  68%, 76% {
+    stroke-dashoffset: 0;
+    opacity: 0.85;
+  }
+  82% {
+    opacity: 0;
+  }
+  100% {
+    stroke-dashoffset: 260;
+    opacity: 0;
+  }
+}
+
+@keyframes neaAmbientGlow {
+  0%, 28% {
+    opacity: 0.08;
+    transform: scale(0.85);
+  }
+  33% {
+    opacity: 0.55;
+    transform: scale(1.15);
+  }
+  50%, 76% {
+    opacity: 0.45;
+    transform: scale(1.05);
+  }
+  82%, 100% {
+    opacity: 0.08;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes neaNodePulse {
+  0%, 42% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  56%, 74% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+  82%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+
+@keyframes neaRunnerBar {
+  0% {
+    left: -35%;
+  }
+  50% {
+    left: 55%;
+  }
+  100% {
+    left: 105%;
+  }
+}
+
+.nea-plug-anim {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: neaPlugMotion 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+}
+
+.nea-flash-anim {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: neaContactFlash 3s ease-out infinite;
+  will-change: transform, opacity;
+}
+
+.nea-cable-anim {
+  stroke-dasharray: 420;
+  animation: neaCableCurrent 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: stroke-dashoffset, opacity;
+}
+
+.nea-circuit-anim {
+  stroke-dasharray: 120 140;
+  animation: neaCircuitSurge 3s ease-out infinite;
+  will-change: stroke-dashoffset, opacity;
+}
+
+.nea-ambient-anim {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: neaAmbientGlow 3s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.nea-node-anim {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: neaNodePulse 3s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.nea-runner-anim {
+  animation: neaRunnerBar 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  will-change: left;
+}
+
+/* Skeleton Loading Shimmer */
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(226, 232, 240, 0.6) 25%,
+    rgba(241, 245, 249, 0.9) 37%,
+    rgba(226, 232, 240, 0.6) 63%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.dark .skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(30, 41, 59, 0.7) 25%,
+    rgba(51, 65, 85, 0.9) 37%,
+    rgba(30, 41, 59, 0.7) 63%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+/* Glassmorphism & Surface Utilities */
+.glass-panel {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.dark .glass-panel {
+  background-color: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(30, 41, 59, 0.8);
+}
+
+.card-interactive {
+  transition: transform 0.22s var(--ease-spring),
+              box-shadow 0.22s var(--ease-spring),
+              border-color 0.2s ease;
+}
+
+.card-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -10px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.04);
+}
+
+.dark .card-interactive:hover {
+  box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.4), 0 4px 8px -2px rgba(0, 0, 0, 0.3);
+}
+
+/* Focus styles for keyboard accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+/* Respect Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *:not(#nea-electric-loader, #nea-electric-loader *),
+  *:not(#nea-electric-loader, #nea-electric-loader *)::before,
+  *:not(#nea-electric-loader, #nea-electric-loader *)::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
